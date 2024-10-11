@@ -2,6 +2,6 @@ package hemmouda.counter;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-public interface CountRepo extends MongoRepository<Count, String> {
+public interface CountRepository extends MongoRepository<Count, String> {
 
 }
