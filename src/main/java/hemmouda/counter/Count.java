@@ -1,28 +1,30 @@
 package hemmouda.counter;
 
-import jakarta.persistence.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Objects;
 
-@Entity
-@Table(name = "_count")
+@Document
 public class Count {
 
     @Id
     private String name;
-
-    @Column(name = "_value")
-    private Long value;
+    private long value;
 
     public Count () {}
 
-    public Count(String name, Long value) {
+    public Count(String name, long value) {
         this.name = name;
         this.value = value;
     }
 
-    public Count (String name, Integer value) {
+    public Count (String name, int value) {
         this(name, (long) value);
+    }
+
+    public Count (String name) {
+        this(name, 0);
     }
 
     public String getName() {
@@ -33,11 +35,11 @@ public class Count {
         this.name = name;
     }
 
-    public Long getValue() {
+    public long getValue() {
         return value;
     }
 
-    public void setValue(Long value) {
+    public void setValue(long value) {
         this.value = value;
     }
 
