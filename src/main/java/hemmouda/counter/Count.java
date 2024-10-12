@@ -29,6 +29,21 @@ public class Count {
         this(name, 0);
     }
 
+    public long inc () {
+        return ++value;
+    }
+
+    public long dec () {
+        if (value > 0) {
+            value--;
+        }
+        return value;
+    }
+
+    public long reset () {
+        return value = 0;
+    }
+
     public String getId() {
         return id;
     }
