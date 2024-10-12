@@ -12,10 +12,20 @@ public class CountModelAssembler implements RepresentationModelAssembler<Count, 
 
     @Override
     public EntityModel<Count> toModel(Count count) {
-        return EntityModel.of(count,
+        EntityModel<Count> entityModel = EntityModel.of(count,
             linkTo(methodOn(CountController.class).one(count.getId())).withSelfRel(),
+            linkTo(methodOn(CountController.class).inc(count.getId())).withRel("inc"),
             linkTo(methodOn(CountController.class).all()).withRel("counts")
         );
+
+        if (count.getValue() > 0) {
+            entityModel.add(linkTo(methodOn(CountController.class).dec(count.getId())).withRel("dec"));
+        }
+        if (count.getValue() != 0) {
+            entityModel.add(linkTo(methodOn(CountController.class).reset(count.getId())).withRel("reset"));
+        }
+
+        return entityModel;
     }
 
 }
