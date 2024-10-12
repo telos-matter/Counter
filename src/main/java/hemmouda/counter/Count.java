@@ -9,6 +9,8 @@ import java.util.Objects;
 public class Count {
 
     @Id
+    private String id;
+
     private String name;
     private long value;
 
@@ -25,6 +27,14 @@ public class Count {
 
     public Count (String name) {
         this(name, 0);
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -48,19 +58,21 @@ public class Count {
         if (this == o) return true;
         if (!(o instanceof Count count)) return false;
 
-        if (!Objects.equals(name, count.name)) return false;
-        return Objects.equals(value, count.value);
+        if (value != count.value) return false;
+        if (!Objects.equals(id, count.id)) return false;
+        return Objects.equals(name, count.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, value);
+        return Objects.hash(id, name, value);
     }
 
     @Override
     public String toString() {
         return "Count{" +
-                "name='" + name + '\'' +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
                 ", value=" + value +
                 '}';
     }
