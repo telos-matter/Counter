@@ -7,6 +7,7 @@ import org.springframework.hateoas.mediatype.problem.Problem;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
@@ -45,15 +46,7 @@ public class CountController {
     }
 
     @PostMapping("/counts")
-    ResponseEntity<?> create (@RequestBody Count count) {
-
-        if (count.getName() == null || count.getName().isBlank()) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE)
-                    .body(Problem.create()
-                            .withTitle("Insufficient data")
-                            .withDetail("A name for the count is required"));
-        }
+    ResponseEntity<?> create (@Validated @RequestBody Count count) {
 
         if (repo.findByName(count.getName()) != null) {
             return ResponseEntity.status(HttpStatus.CONFLICT)
