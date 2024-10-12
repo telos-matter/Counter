@@ -13,7 +13,7 @@ public class CountModelAssembler implements RepresentationModelAssembler<Count, 
     @Override
     public EntityModel<Count> toModel(Count count) {
         return EntityModel.of(count,
-            linkTo(methodOn(CountController.class).one(count.getName())).withSelfRel(),
+            linkTo(methodOn(CountController.class).one(count.getId())).withSelfRel(),
             linkTo(methodOn(CountController.class).all()).withRel("counts")
         );
     }
