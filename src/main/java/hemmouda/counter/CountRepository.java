@@ -6,11 +6,12 @@ import org.springframework.data.mongodb.repository.Query;
 public interface CountRepository extends MongoRepository<Count, String> {
 
     /**
-     * @return a Count document with the name <code>name</code>
-     * if found, otherwise <code>null</code>. Case insensitive
-     * search.
+     * Checks if a Count document with the specified name exists in the database.
+     * Case-insensitive search.
+     *
+     * @return true if a Count document with the given name exists, false otherwise.
      */
-    @Query("{ 'name': { $regex: ?0, $options: 'i' } }")
-    Count findByName (String name) ;
+    @Query(value = "{ 'name': { $regex: ?0, $options: 'i' } }", exists = true)
+    boolean existsByName(String name);
 
 }
