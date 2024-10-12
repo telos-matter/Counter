@@ -45,10 +45,16 @@ public class CountController {
         return assembler.toModel(count);
     }
 
+    @GetMapping("/counts/{name}/available")
+    public ResponseEntity<Boolean> nameAvailable (@PathVariable String name) {
+        boolean available = !repo.existsByName(name);
+        return ResponseEntity.ok(available);
+    }
+
     @PostMapping("/counts")
     ResponseEntity<?> create (@Validated @RequestBody Count count) {
 
-        if (repo.findByName(count.getName()) != null) {
+        if (repo.existsByName(count.getName())) {
             return ResponseEntity.status(HttpStatus.CONFLICT)
                     .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE)
                     .body(Problem.create()
