@@ -8,11 +8,13 @@
 		<version>3.3.4</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
+	
 	<groupId>hemmouda</groupId>
 	<artifactId>counter</artifactId>
 	<version>0.0.1</version>
 	<name>Counter</name>
 	<description>Counts stuff.</description>
+	<url>https://github.com/telos-matter/Counter</url>
 
 	<properties>
 		<java.version>17</java.version>
