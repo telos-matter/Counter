@@ -3,6 +3,7 @@ package hemmouda.counter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.validation.constraints.NotBlank;
 import java.util.Objects;
 
 @Document
@@ -11,6 +12,7 @@ public class Count {
     @Id
     private String id;
 
+    @NotBlank(message = "Name is mandatory")
     private String name;
     private long value;
 
